@@ -19,6 +19,8 @@ int	ft_printf(const char *format, ...)
 			format++;
 			count += ft_args(*format, args);
 		}
+		else
+			write(1, format, 1);
 		format++;
 	}
 	return (count);
@@ -117,20 +119,41 @@ int	ft_print_ptr(void *ptr)
 	return (count);
 }
 
+int     ft_putnbr_unsigned(unsigned int n)
+{
+        if (n > 10)
+        {
+                ft_putnbr(n / 10);
+                ft_putnbr(n % 10);
+        }
+        else
+        {
+                n += '0';
+                return(write(1, &n, 1));
+        }
+        return (0);
+}
+
 int	ft_args(char c, va_list args)
 {
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
 	if (c == 's')
 		return (ft_putstr(va_arg(args, char *)));
+	if (c == 'p')
+		return (ft_print_ptr(va_arg(args, void *)));
 	if (c == 'd')
 		return (ft_putnbr(va_arg(args, int)));
 	if (c == 'i')
 		return (ft_putnbr(va_arg(args, int)));
+	if (c == 'u')
+		return (ft_putnbr_unsigned(va_arg(args, int)));
 	if (c == 'x')
 		return (ft_convert_hexa(va_arg(args, void *), "0123456789abcdefg"));
-	if (c == 'p')
-		return (ft_print_ptr(va_arg(args, void *)));
+	if (c == 'X')
+		return (ft_convert_hexa(va_arg(args, void *), "0123456789ABCDEFG"));
+	if (c == '%')
+		return (write(1, "%", 1));
 	return (0);
 }
 int main(void)
@@ -138,7 +161,7 @@ int main(void)
 	void	*ptr = "azea";
 	ft_printf("%c %c %c", 'a','b','c');
 	printf("\n");
-	ft_printf("%s", "Bonjour a tous les amis, ceci est une string de mon printf");
+	ft_printf("%s et oui", "Bonjour a tous les amis, ceci est une string de mon printf");
 	printf("\n");
 	ft_printf("%d %s", 667, " ekip");
 	printf("\n");
@@ -146,5 +169,7 @@ int main(void)
 	printf("\n");
 	ft_printf("%p", ptr);
 	printf("\n");
-	printf("%p", ptr);
+	ft_printf("%%");
+	printf("\n");
+	ft_printf("%u", 1231313);
 }

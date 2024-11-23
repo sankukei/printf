@@ -56,15 +56,18 @@ int	ft_print_ptr(void *ptr)
 
 int	ft_putnbr_unsigned(unsigned int n)
 {
+	int	count;
+
+	count = 0;
 	if (n > 10)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		count += ft_putnbr_unsigned(n / 10);
+		count += ft_putnbr_unsigned(n % 10);
 	}
 	else
 	{
 		n += '0';
-		return (write(1, &n, 1));
+		count += write(1, &n, 1);
 	}
-	return (0);
+	return (count);
 }

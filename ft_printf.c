@@ -15,7 +15,7 @@ int	ft_printf(const char *format, ...)
 			count += ft_args(*format, args);
 		}
 		else
-			write(1, format, 1);
+			count += write(1, format, 1);
 		format++;
 	}
 	return (count);
@@ -38,6 +38,9 @@ int	ft_putstr(char *str)
 
 int	ft_putnbr(int n)
 {
+	int	count;
+
+	count = 0;
 	if (n == -2147483648)
 		return (write(1, "-2147483648", 11));
 	if (n < 0)
@@ -45,17 +48,17 @@ int	ft_putnbr(int n)
 		n *= -1;
 		write(1, "-", 1);
 	}
-	if (n > 10)
+	if (n > 9)
 	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		count += ft_putnbr(n / 10);
+		count += ft_putnbr(n % 10);
 	}
 	else
 	{
 		n += '0';
-		return (write(1, &n, 1));
+		count += write(1, &n, 1);
 	}
-	return (0);
+	return (count);
 }
 
 int	ft_args(char c, va_list args)
@@ -80,10 +83,29 @@ int	ft_args(char c, va_list args)
 		return (write(1, "%", 1));
 	return (0);
 }
-/*
+
 int main(void)
 {
 #include <stdio.h>
+/*
+	int count1;
+	int count2;
+	void	*ptr = "azezaeaez";
+	count1 = 0;
+	count2 = 0;
+	count1 = ft_printf("%d\n", 1012313);
+	count2 = printf("%d\n", 1012313);
+	ft_printf("%d\n", count1);
+	ft_printf("%d\n", count2);
+	count1 = ft_printf("%p\n", ptr);
+	count2 = printf("%p\n", ptr);
+	ft_printf("%d\n", count1);
+	ft_printf("%d\n", count2);
+	count1 = ft_printf("Bonjour, ou alors %s %s\n", "Kikoo", "les amis");
+	count2 = printf("Bonjour, ou alors %s %s\n", "Kikoo", "les amis");
+	ft_printf("%d\n", count1);
+	ft_printf("%d\n", count2);
+
 	void	*ptr = "azea";
 	ft_printf("%c %c %c", 'a','b','c');
 	printf("\n");
@@ -99,4 +121,5 @@ int main(void)
 	ft_printf("%%");
 	printf("\n");
 	ft_printf("%u", 1231313);
-}*/
+*/
+}

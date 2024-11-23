@@ -83,11 +83,11 @@ int	ft_args(char c, va_list args)
 		return (write(1, "%", 1));
 	return (0);
 }
-
+/*
 int main(void)
 {
 #include <stdio.h>
-/*
+
 	int count1;
 	int count2;
 	void	*ptr = "azezaeaez";
@@ -121,5 +121,5 @@ int main(void)
 	ft_printf("%%");
 	printf("\n");
 	ft_printf("%u", 1231313);
-*/
-}
+
+}*/

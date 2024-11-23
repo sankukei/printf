@@ -5,6 +5,8 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		count;
 
+	if (!*format)
+		return (0);
 	count = 0;
 	va_start(args, format);
 	while (*format)
@@ -121,5 +123,7 @@ int main(void)
 	ft_printf("%%");
 	printf("\n");
 	ft_printf("%u", 1231313);
-
-}*/
+	printf("\n");
+	printf(0);
+*/
+}

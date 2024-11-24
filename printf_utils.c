@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printf_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leothoma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/24 01:55:14 by leothoma          #+#    #+#             */
+/*   Updated: 2024/11/24 01:55:14 by leothoma         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_chackal(unsigned long n)
@@ -5,7 +17,7 @@ int	ft_chackal(unsigned long n)
 	int	i;
 
 	i = 0;
-	while (n > 16)
+	while (n >= 16)
 	{
 		n /= 16;
 		i++;
@@ -13,7 +25,7 @@ int	ft_chackal(unsigned long n)
 	return (i + 1);
 }
 
-int	ft_convert_hexa(void *ptr, char *set)
+int	ft_convert_hexa(unsigned long n, char *set)
 {
 	unsigned long	res;
 	int				count;
@@ -21,7 +33,7 @@ int	ft_convert_hexa(void *ptr, char *set)
 	unsigned long	len;
 
 	res = 0;
-	res = (unsigned long)ptr;
+	res = n;
 	len = ft_chackal(res);
 	sinistre[len] = '\0';
 	while (len--)
@@ -48,9 +60,11 @@ int	ft_print_ptr(void *ptr)
 {
 	int	count;
 
+	if (!ptr)
+		return (ft_putstr("(nil)"));
 	count = 0;
 	count += write(1, "0x", 2);
-	count += ft_convert_hexa(ptr, "0123456789abcdefg");
+	count += ft_convert_hexa((unsigned long)ptr, "0123456789abcdefg");
 	return (count);
 }
 
@@ -59,7 +73,7 @@ int	ft_putnbr_unsigned(unsigned int n)
 	int	count;
 
 	count = 0;
-	if (n > 10)
+	if (n > 9)
 	{
 		count += ft_putnbr_unsigned(n / 10);
 		count += ft_putnbr_unsigned(n % 10);

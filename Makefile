@@ -1,8 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: leothoma <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/24 01:55:07 by leothoma          #+#    #+#              #
+#    Updated: 2024/11/24 01:55:07 by leothoma         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 AR          = ar rcs
 
-NAME        = ft_printf.a
+NAME        = libftprintf.a
 SRCS        = ft_printf.c printf_utils.c
 OBJS        = $(SRCS:.c=.o)
 

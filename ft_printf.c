@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 
 int	ft_printf(const char *format, ...)
-{	
+{
 	va_list	args;
 	int		count;
 
@@ -81,24 +81,26 @@ int	ft_args(char c, va_list args)
 {
 	if (c == 'c')
 		return (ft_putchar(va_arg(args, int)));
-	if (c == 's')
+	else if (c == 's')
 		return (ft_putstr(va_arg(args, char *)));
-	if (c == 'p')
+	else if (c == 'p')
 		return (ft_print_ptr(va_arg(args, void *)));
-	if (c == 'd')
+	else if (c == 'd')
 		return (ft_putnbr(va_arg(args, int)));
-	if (c == 'i')
+	else if (c == 'i')
 		return (ft_putnbr(va_arg(args, int)));
-	if (c == 'u')
+	else if (c == 'u')
 		return (ft_putnbr_unsigned(va_arg(args, int)));
-	if (c == 'x')
+	else if (c == 'x')
 		return (ft_convert_hexa(va_arg(args, unsigned int),
 				"0123456789abcdefg"));
-	if (c == 'X')
+	else if (c == 'X')
 		return (ft_convert_hexa(va_arg(args, unsigned int),
 				"0123456789ABCDEFG"));
-	if (c == '%')
+	else if (c == '%')
 		return (write(1, "%", 1));
+	else
+		return (-1);
 	return (0);
 }
 /*
@@ -106,7 +108,10 @@ int main(void)
 {
 #include <stdio.h>
 
-
-	ft_printf(" %u ", 10);
-	printf(" %u ", 100);
+int	count1 = 0;
+int	count2 = 0;
+	count1 = ft_printf("% ", 4);
+	count2 = printf("% ", 4);
+	ft_printf("%d", count1);
+	printf("%d", count2);
 }*/
